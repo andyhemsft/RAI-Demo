@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Configuration - AI Supervision System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i data-feather="shield"></i>
+                <span>AI Supervision</span>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i data-feather="home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="rules.html" class="nav-link">
+                    <i data-feather="settings"></i>
+                    <span>Rule Configuration</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="compliance.html" class="nav-link">
+                    <i data-feather="check-circle"></i>
+                    <span>Compliance Config</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="alerts.html" class="nav-link">
+                    <i data-feather="alert-triangle"></i>
+                    <span>Alerts</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="reports.html" class="nav-link">
+                    <i data-feather="file-text"></i>
+                    <span>Audit Reports</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Compliance Configuration</h1>
+                <p class="subtitle">Select metrics and configure testing parameters for AI model compliance</p>
+            </div>
+            <div class="header-right">
+                <div class="config-actions">
+                    <button class="btn-secondary" onclick="loadPreset()">
+                        <i data-feather="upload"></i>
+                        Load Preset
+                    </button>
+                    <button class="btn-secondary" onclick="saveAsPreset()">
+                        <i data-feather="bookmark"></i>
+                        Save Preset
+                    </button>
+                    <button class="btn-primary" onclick="saveConfiguration()">
+                        <i data-feather="save"></i>
+                        Save Configuration
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Compliance Content -->
+        <div class="content-container">
+            <div class="compliance-content">
+                
+                <!-- Configuration Summary -->
+                <div class="config-summary">
+                    <h2>Configuration Summary</h2>
+                    <div class="summary-stats">
+                        <div class="summary-item">
+                            <span class="summary-number" id="fairness-count">0</span>
+                            <span class="summary-label">Fairness Metrics</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-number" id="explainability-count">0</span>
+                            <span class="summary-label">Explainability Metrics</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-number" id="robustness-count">0</span>
+                            <span class="summary-label">Robustness Metrics</span>
+                        </div>
+                        <div class="summary-item total">
+                            <span class="summary-number" id="total-count">0</span>
+                            <span class="summary-label">Total Selected</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metric Categories -->
+                <div class="metric-categories">
+                    
+                    <!-- Fairness Metrics -->
+                    <div class="category-section">
+                        <div class="category-header">
+                            <div class="category-title">
+                                <div class="category-icon fairness">
+                                    <i data-feather="users"></i>
+                                </div>
+                                <div class="category-info">
+                                    <h3>Fairness Metrics</h3>
+                                    <p>Assess bias and ensure equitable outcomes across demographic groups</p>
+                                </div>
+                            </div>
+                            <div class="category-controls">
+                                <button class="btn-toggle" onclick="toggleCategory('fairness')">
+                                    <span class="toggle-text">Select All</span>
+                                    <i data-feather="check-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="metrics-grid" id="fairness-metrics">
+                            <div class="metric-card" data-metric="disparate-impact">
+                                <div class="metric-header">
+                                    <div class="metric-checkbox">
+                                        <input type="checkbox" id="metric-disparate-impact">
+                                        <label for="metric-disparate-impact"></label>
+                                    </div>
+                                    <h4>Disparate Impact Ratio</h4>
+                                </div>
+                                <p class="metric-description">Measures the ratio of favorable outcomes between protected and unprotected groups</p>
+                                <div class="metric-details">
+                                    <span class="metric-type">Statistical Parity</span>
+                                    <span class="metric-complexity">Medium</span>
+                                </div>
+                            </div>
+
+                            <div class="metric-card" data-metric="equal-opportunity">
+                                <div class="metric-header">
+                                    <div class="metric-checkbox">
+                                        <input type="checkbox" id="metric-equal-opportunity">
+                                        <label for="metric-equal-opportunity"></label>
+                                    </div>
+                                    <h4>Equal Opportunity Difference</h4>
+                                </div>
+                                <p class="metric-description">Evaluates differences in true positive rates across demographic groups</p>
+                                <div class="metric-details">
+                                    <span class="metric-type">Individual Fairness</span>
+                                    <span class="metric-complexity">Medium</span>
+                                </div>
+                            </div>
+
+                            <div class="metric-card" data-metric="demographic-parity">
+                                <div class="metric-header">
+                                    <div class="metric-checkbox">
+                                        <input type="checkbox" id="metric-demographic-parity">
+                                        <label for="metric-demographic-parity"></label>
+                                    </div>
+                                    <h4>Demographic Parity</h4>
+                                </div>
+                                <p class="metric-description">Ensures equal positive prediction rates across protected groups</p>
+                                <div class="metric-details">
+                                    <span class="metric-type">Group Fairness</span>
+                                    <span class="metric-complexity">Low</span>
+                                </div>
+                            </div>
+
+                            <div class="metric-card" data-metric="equalized-odds">
+                                <div class="metric-header">
+                                    <div class="metric-checkbox">
+                                        <input type="checkbox" id="metric-equalized-odds">
+                                        <label for="metric-equalized-odds"></label>
+                                    </div>
+                                    <h4>Equalized Odds</h4>
+                                </div>
+                                <p class="metric-description">Compares true positive and false positive rates across groups</p>
+                                <div class="metric-details">
+                                    <span class="metric-type">Conditional Parity</span>
+                                    <span class="metric-complexity">High</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Explainability Metrics -->
+                    <div class="category-section">
+                        <div class="category-header">
+                            <div class="category-title">
+                                <div class="category-icon explainability">
+                                    <i data-feather="eye"></i>
+                                </div>
+                                <div class="category-info">
+                                    <h3>Explainability Metrics</h3>
+                                    <p>Evaluate model interpretability and explanation quality</p>
+                                </div>
+                            </div>
+                            <div class="category-controls">
+                                <button class="btn-toggle" onclick="toggleCategory('explainability')">
+                                    <span class="toggle-text">Select All</span>
+                                    <i data-feather="check-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="metrics-grid" id="explainability-metrics">
+                            <div class="metric-card" data-metric="feature-importance">
+                                <div class="metric-header">
+                                    <div class="metric-checkbox">
+                                        <input type="checkbox" id="metric-feature-importance">
+                                        <label for="metric-feature-importance"></label>
+                                    </div>
+                                    <h4>Feature Importance Consistency</h4>
+                                </div>
+                                <p class="metric-description">Measures consistency of feature importance rankings across similar inputs</p>
+                                <div class="metric-details">
+                                    <span class="metric-type">Global Explanation</span>
+                                    <span class="metric-complexity">Medium</span>
+                                </div>
+                            </div>
+
+                            <div class="metric-card" data-metric="lime-stability">
+                                <div class="metric-header">
+                                    <div class="metric-checkbox">
+                                        <input type="checkbox" id="metric-lime-stability">
+                                        <label for="metric-lime-stability"></label>
+                                    </div>
+                                    <h4>LIME Stability Score</h4>
+                                </div>
+                                <p class="metric-description">Evaluates stability of LIME explanations for similar instances</p>
+                                <div class="metric-details">
+                                    <span class="metric-type">Local Explanation</span>
+                                    <span class="metric-complexity">High</span>
+                                </div>
+                            </div>
+
+                            <div class="metric-card" data-metric="shap-consistency">
+                                <div class="metric-header">
+                                    <div class="metric-checkbox">
+                                        <input type="checkbox" id="metric-shap-consistency">
+                                        <label for="metric-shap-consistency"></label>
+                                    </div>
+                                    <h4>SHAP Value Consistency</h4>
+                                </div>
+                                <p class="metric-description">Measures consistency of SHAP values across model predictions</p>
+                                <div class="metric-details">
+                                    <span class="metric-type">Attribution Method</span>
+                                    <span class="metric-complexity">Medium</span>
+                                </div>
+                            </div>
+
+                            <div class="metric-card" data-metric="explanation-fidelity">
+                                <div class="metric-header">
+                                    <div class="metric-checkbox">
+                                        <input type="checkbox" id="metric-explanation-fidelity">
+                                        <label for="metric-explanation-fidelity"></label>
+                                    </div>
+                                    <h4>Explanation Fidelity</h4>
+                                </div>
+                                <p class="metric-description">Assesses how well explanations represent actual model behavior</p>
+                                <div class="metric-details">
+                                    <span class="metric-type">Fidelity Measure</span>
+                                    <span class="metric-complexity">High</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Robustness Metrics -->
+                    <div class="category-section">
+                        <div class="category-header">
+                            <div class="category-title">
+                                <div class="category-icon robustness">
+                                    <i data-feather="shield"></i>
+                                </div>
+                                <div class="category-info">
+                                    <h3>Robustness Metrics</h3>
+                                    <p>Test model resilience against adversarial attacks and data drift</p>
+                                </div>
+                            </div>
+                            <div class="category-controls">
+                                <button class="btn-toggle" onclick="toggleCategory('robustness')">
+                                    <span class="toggle-text">Select All</span>
+                                    <i data-feather="check-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="metrics-grid" id="robustness-metrics">
+                            <div class="metric-card" data-metric="adversarial-robustness">
+                                <div class="metric-header">
+                                    <div class="metric-checkbox">
+                                        <input type="checkbox" id="metric-adversarial-robustness">
+                                        <label for="metric-adversarial-robustness"></label>
+                                    </div>
+                                    <h4>Adversarial Robustness</h4>
+                                </div>
+                                <p class="metric-description">Measures model resistance to adversarial perturbations</p>
+                                <div class="metric-details">
+                                    <span class="metric-type">Attack Resistance</span>
+                                    <span class="metric-complexity">High</span>
+                                </div>
+                            </div>
+
+                            <div class="metric-card" data-metric="data-drift">
+                                <div class="metric-header">
+                                    <div class="metric-checkbox">
+                                        <input type="checkbox" id="metric-data-drift">
+                                        <label for="metric-data-drift"></label>
+                                    </div>
+                                    <h4>Data Drift Detection</h4>
+                                </div>
+                                <p class="metric-description">Detects distribution shifts in input features over time</p>
+                                <div class="metric-details">
+                                    <span class="metric-type">Distribution Shift</span>
+                                    <span class="metric-complexity">Medium</span>
+                                </div>
+                            </div>
+
+                            <div class="metric-card" data-metric="prediction-stability">
+                                <div class="metric-header">
+                                    <div class="metric-checkbox">
+                                        <input type="checkbox" id="metric-prediction-stability">
+                                        <label for="metric-prediction-stability"></label>
+                                    </div>
+                                    <h4>Prediction Stability</h4>
+                                </div>
+                                <p class="metric-description">Evaluates consistency of predictions for similar inputs</p>
+                                <div class="metric-details">
+                                    <span class="metric-type">Stability Test</span>
+                                    <span class="metric-complexity">Low</span>
+                                </div>
+                            </div>
+
+                            <div class="metric-card" data-metric="noise-robustness">
+                                <div class="metric-header">
+                                    <div class="metric-checkbox">
+                                        <input type="checkbox" id="metric-noise-robustness">
+                                        <label for="metric-noise-robustness"></label>
+                                    </div>
+                                    <h4>Noise Robustness</h4>
+                                </div>
+                                <p class="metric-description">Tests model performance under various noise conditions</p>
+                                <div class="metric-details">
+                                    <span class="metric-type">Noise Tolerance</span>
+                                    <span class="metric-complexity">Medium</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testing Configuration -->
+                <div class="testing-config">
+                    <h2>Testing Configuration</h2>
+                    <div class="config-grid">
+                        <div class="config-section">
+                            <h3>Test Frequency</h3>
+                            <div class="config-options">
+                                <label class="radio-option">
+                                    <input type="radio" name="frequency" value="daily" checked>
+                                    <span class="radio-custom"></span>
+                                    <span>Daily</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="frequency" value="weekly">
+                                    <span class="radio-custom"></span>
+                                    <span>Weekly</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="frequency" value="monthly">
+                                    <span class="radio-custom"></span>
+                                    <span>Monthly</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <h3>Sample Size</h3>
+                            <div class="config-input">
+                                <input type="number" id="sample-size" value="1000" min="100" max="10000" step="100">
+                                <span class="input-suffix">samples</span>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <h3>Confidence Level</h3>
+                            <div class="config-input">
+                                <select id="confidence-level">
+                                    <option value="0.90">90%</option>
+                                    <option value="0.95" selected>95%</option>
+                                    <option value="0.99">99%</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <h3>Auto-remediation</h3>
+                            <div class="config-toggle">
+                                <input type="checkbox" id="auto-remediation" class="toggle-checkbox">
+                                <label for="auto-remediation" class="toggle-label">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-text">Enable automatic remediation suggestions</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="compliance.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
