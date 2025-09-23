@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use Cases - AI Auditing System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i data-feather="cpu"></i>
+                <span>AI Auditing</span>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i data-feather="home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="use-cases.html" class="nav-link">
+                    <i data-feather="folder"></i>
+                    <span>Use Cases</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tests.html" class="nav-link">
+                    <i data-feather="play-circle"></i>
+                    <span>Run Tests</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="reports.html" class="nav-link">
+                    <i data-feather="file-text"></i>
+                    <span>Audit Reports</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="settings.html" class="nav-link">
+                    <i data-feather="settings"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Use Cases Management</h1>
+                <p class="subtitle">Create and manage testing scenarios for your AI models</p>
+            </div>
+            <div class="header-right">
+                <button class="btn-primary" onclick="createNewUseCase()">
+                    <i data-feather="plus"></i>
+                    Create Use Case
+                </button>
+            </div>
+        </header>
+
+        <!-- Use Cases Content -->
+        <div class="content-container">
+            <div class="use-cases-content">
+                
+                <!-- Use Cases Grid -->
+                <div class="use-cases-grid">
+                    <div class="use-case-card">
+                        <div class="use-case-header">
+                            <div class="use-case-info">
+                                <h3>Credit Scoring Model</h3>
+                                <div class="use-case-meta">
+                                    <span class="risk-badge high">High Risk</span>
+                                    <span class="model-type">Classification</span>
+                                    <span class="created-date">Created: Sep 15, 2025</span>
+                                </div>
+                            </div>
+                            <div class="use-case-actions">
+                                <button class="btn-icon" onclick="editUseCase('credit-scoring')" title="Edit">
+                                    <i data-feather="edit-2"></i>
+                                </button>
+                                <button class="btn-icon" onclick="duplicateUseCase('credit-scoring')" title="Duplicate">
+                                    <i data-feather="copy"></i>
+                                </button>
+                                <button class="btn-icon danger" onclick="deleteUseCase('credit-scoring')" title="Delete">
+                                    <i data-feather="trash-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="use-case-description">Credit risk assessment model for loan applications with comprehensive bias detection and fairness testing across demographic groups.</p>
+                        <div class="use-case-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">5</span>
+                                <span class="stat-label">Tests Run</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">85%</span>
+                                <span class="stat-label">Avg Score</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">2 days ago</span>
+                                <span class="stat-label">Last Test</span>
+                            </div>
+                        </div>
+                        <div class="use-case-footer">
+                            <button class="btn-primary" onclick="runTest('credit-scoring')">Run Test</button>
+                            <button class="btn-secondary" onclick="viewReports('credit-scoring')">View Reports</button>
+                        </div>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-header">
+                            <div class="use-case-info">
+                                <h3>Fraud Detection System</h3>
+                                <div class="use-case-meta">
+                                    <span class="risk-badge medium">Medium Risk</span>
+                                    <span class="model-type">Classification</span>
+                                    <span class="created-date">Created: Sep 10, 2025</span>
+                                </div>
+                            </div>
+                            <div class="use-case-actions">
+                                <button class="btn-icon" onclick="editUseCase('fraud-detection')" title="Edit">
+                                    <i data-feather="edit-2"></i>
+                                </button>
+                                <button class="btn-icon" onclick="duplicateUseCase('fraud-detection')" title="Duplicate">
+                                    <i data-feather="copy"></i>
+                                </button>
+                                <button class="btn-icon danger" onclick="deleteUseCase('fraud-detection')" title="Delete">
+                                    <i data-feather="trash-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="use-case-description">Real-time fraud detection system with focus on minimizing false positive rates while maintaining high security standards and model interpretability.</p>
+                        <div class="use-case-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">8</span>
+                                <span class="stat-label">Tests Run</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">72%</span>
+                                <span class="stat-label">Avg Score</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">1 week ago</span>
+                                <span class="stat-label">Last Test</span>
+                            </div>
+                        </div>
+                        <div class="use-case-footer">
+                            <button class="btn-primary" onclick="runTest('fraud-detection')">Run Test</button>
+                            <button class="btn-secondary" onclick="viewReports('fraud-detection')">View Reports</button>
+                        </div>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-header">
+                            <div class="use-case-info">
+                                <h3>Insurance Premium Prediction</h3>
+                                <div class="use-case-meta">
+                                    <span class="risk-badge high">High Risk</span>
+                                    <span class="model-type">Regression</span>
+                                    <span class="created-date">Created: Sep 8, 2025</span>
+                                </div>
+                            </div>
+                            <div class="use-case-actions">
+                                <button class="btn-icon" onclick="editUseCase('insurance-premium')" title="Edit">
+                                    <i data-feather="edit-2"></i>
+                                </button>
+                                <button class="btn-icon" onclick="duplicateUseCase('insurance-premium')" title="Duplicate">
+                                    <i data-feather="copy"></i>
+                                </button>
+                                <button class="btn-icon danger" onclick="deleteUseCase('insurance-premium')" title="Delete">
+                                    <i data-feather="trash-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="use-case-description">Automated insurance premium calculation model ensuring fair pricing across different customer segments and demographic groups.</p>
+                        <div class="use-case-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">3</span>
+                                <span class="stat-label">Tests Run</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">91%</span>
+                                <span class="stat-label">Avg Score</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">3 days ago</span>
+                                <span class="stat-label">Last Test</span>
+                            </div>
+                        </div>
+                        <div class="use-case-footer">
+                            <button class="btn-primary" onclick="runTest('insurance-premium')">Run Test</button>
+                            <button class="btn-secondary" onclick="viewReports('insurance-premium')">View Reports</button>
+                        </div>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-header">
+                            <div class="use-case-info">
+                                <h3>Document Summarization</h3>
+                                <div class="use-case-meta">
+                                    <span class="risk-badge low">Low Risk</span>
+                                    <span class="model-type">Summarization</span>
+                                    <span class="created-date">Created: Sep 5, 2025</span>
+                                </div>
+                            </div>
+                            <div class="use-case-actions">
+                                <button class="btn-icon" onclick="editUseCase('document-summarization')" title="Edit">
+                                    <i data-feather="edit-2"></i>
+                                </button>
+                                <button class="btn-icon" onclick="duplicateUseCase('document-summarization')" title="Duplicate">
+                                    <i data-feather="copy"></i>
+                                </button>
+                                <button class="btn-icon danger" onclick="deleteUseCase('document-summarization')" title="Delete">
+                                    <i data-feather="trash-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="use-case-description">Automated document summarization system with quality assessment and accuracy validation for various document types.</p>
+                        <div class="use-case-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">3</span>
+                                <span class="stat-label">Tests Run</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">78%</span>
+                                <span class="stat-label">Avg Score</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">5 days ago</span>
+                                <span class="stat-label">Last Test</span>
+                            </div>
+                        </div>
+                        <div class="use-case-footer">
+                            <button class="btn-primary" onclick="runTest('document-summarization')">Run Test</button>
+                            <button class="btn-secondary" onclick="viewReports('document-summarization')">View Reports</button>
+                        </div>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-header">
+                            <div class="use-case-info">
+                                <h3>Customer Support RAG</h3>
+                                <div class="use-case-meta">
+                                    <span class="risk-badge medium">Medium Risk</span>
+                                    <span class="model-type">RAG</span>
+                                    <span class="created-date">Created: Sep 3, 2025</span>
+                                </div>
+                            </div>
+                            <div class="use-case-actions">
+                                <button class="btn-icon" onclick="editUseCase('customer-support-rag')" title="Edit">
+                                    <i data-feather="edit-2"></i>
+                                </button>
+                                <button class="btn-icon" onclick="duplicateUseCase('customer-support-rag')" title="Duplicate">
+                                    <i data-feather="copy"></i>
+                                </button>
+                                <button class="btn-icon danger" onclick="deleteUseCase('customer-support-rag')" title="Delete">
+                                    <i data-feather="trash-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="use-case-description">Retrieval-Augmented Generation system for automated customer support with accuracy and hallucination testing.</p>
+                        <div class="use-case-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">6</span>
+                                <span class="stat-label">Tests Run</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">83%</span>
+                                <span class="stat-label">Avg Score</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">1 week ago</span>
+                                <span class="stat-label">Last Test</span>
+                            </div>
+                        </div>
+                        <div class="use-case-footer">
+                            <button class="btn-primary" onclick="runTest('customer-support-rag')">Run Test</button>
+                            <button class="btn-secondary" onclick="viewReports('customer-support-rag')">View Reports</button>
+                        </div>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-header">
+                            <div class="use-case-info">
+                                <h3>Hiring Score Prediction</h3>
+                                <div class="use-case-meta">
+                                    <span class="risk-badge high">High Risk</span>
+                                    <span class="model-type">Classification</span>
+                                    <span class="created-date">Created: Aug 28, 2025</span>
+                                </div>
+                            </div>
+                            <div class="use-case-actions">
+                                <button class="btn-icon" onclick="editUseCase('hiring-score')" title="Edit">
+                                    <i data-feather="edit-2"></i>
+                                </button>
+                                <button class="btn-icon" onclick="duplicateUseCase('hiring-score')" title="Duplicate">
+                                    <i data-feather="copy"></i>
+                                </button>
+                                <button class="btn-icon danger" onclick="deleteUseCase('hiring-score')" title="Delete">
+                                    <i data-feather="trash-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="use-case-description">AI-powered hiring decision support system with comprehensive bias testing and equal opportunity assessment.</p>
+                        <div class="use-case-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">4</span>
+                                <span class="stat-label">Tests Run</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">79%</span>
+                                <span class="stat-label">Avg Score</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">2 weeks ago</span>
+                                <span class="stat-label">Last Test</span>
+                            </div>
+                        </div>
+                        <div class="use-case-footer">
+                            <button class="btn-primary" onclick="runTest('hiring-score')">Run Test</button>
+                            <button class="btn-secondary" onclick="viewReports('hiring-score')">View Reports</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Use Case Modal -->
+    <div id="create-use-case-modal" class="modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeCreateUseCaseModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Use Case</h3>
+                <button class="close-btn" onclick="closeCreateUseCaseModal()">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="create-use-case-form">
+                    <div class="form-group">
+                        <label for="use-case-name">Use Case Name *</label>
+                        <input type="text" id="use-case-name" required placeholder="Enter a unique name for this use case">
+                        <small class="form-help">This name will be used to identify your testing scenario</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="risk-category">Risk Category *</label>
+                        <select id="risk-category" required>
+                            <option value="">Select risk level</option>
+                            <option value="low">Low Risk</option>
+                            <option value="medium">Medium Risk</option>
+                            <option value="high">High Risk</option>
+                        </select>
+                        <small class="form-help">Assess the potential impact and regulatory requirements</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="model-type">AI Model Type *</label>
+                        <select id="model-type" required>
+                            <option value="">Select model type</option>
+                            <option value="classification">Classification</option>
+                            <option value="regression">Regression</option>
+                            <option value="rag">RAG (Retrieval-Augmented Generation)</option>
+                            <option value="summarization">Summarization</option>
+                        </select>
+                        <small class="form-help">Choose the type that best describes your AI model</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="use-case-description">Description *</label>
+                        <textarea id="use-case-description" required rows="4" placeholder="Describe the purpose, scope, and key objectives of this use case"></textarea>
+                        <small class="form-help">Provide details about what this model does and why it needs testing</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="testing-focus">Testing Focus Areas</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="focus-fairness" value="fairness">
+                                <span class="checkbox-custom"></span>
+                                <span>Fairness & Bias Testing</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="focus-explainability" value="explainability">
+                                <span class="checkbox-custom"></span>
+                                <span>Explainability & Interpretability</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="focus-robustness" value="robustness">
+                                <span class="checkbox-custom"></span>
+                                <span>Robustness & Stability</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="focus-performance" value="performance">
+                                <span class="checkbox-custom"></span>
+                                <span>Performance & Accuracy</span>
+                            </label>
+                        </div>
+                        <small class="form-help">Select the areas you want to focus on for testing</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeCreateUseCaseModal()">Cancel</button>
+                <button type="button" class="btn-primary" onclick="saveUseCase()">Create Use Case</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="use-cases.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Auditing Dashboard - AI Testing Environment</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i data-feather="cpu"></i>
+                <span>AI Auditing</span>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item active">
+                <a href="index.html" class="nav-link">
+                    <i data-feather="home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="use-cases.html" class="nav-link">
+                    <i data-feather="folder"></i>
+                    <span>Use Cases</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tests.html" class="nav-link">
+                    <i data-feather="play-circle"></i>
+                    <span>Run Tests</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="reports.html" class="nav-link">
+                    <i data-feather="file-text"></i>
+                    <span>Audit Reports</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="settings.html" class="nav-link">
+                    <i data-feather="settings"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Auditing Dashboard</h1>
+                <p class="subtitle">Test and validate AI models for responsible AI compliance in your environment</p>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <div class="notification-bell">
+                        <i data-feather="bell"></i>
+                        <span class="notification-badge">2</span>
+                    </div>
+                    <div class="user-avatar">
+                        <span>AU</span>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name">Audit User</span>
+                        <span class="user-role">Data Scientist</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="content-container">
+            <div class="dashboard-content">
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Quick Actions</h2>
+                    <div class="actions-grid">
+                        <div class="action-card" onclick="window.location.href='use-cases.html?action=create'">
+                            <div class="action-icon">
+                                <i data-feather="plus-circle"></i>
+                            </div>
+                            <div class="action-content">
+                                <h3>Create Use Case</h3>
+                                <p>Set up a new testing scenario for your AI model</p>
+                            </div>
+                        </div>
+                        
+                        <div class="action-card" onclick="window.location.href='tests.html?action=run'">
+                            <div class="action-icon">
+                                <i data-feather="play"></i>
+                            </div>
+                            <div class="action-content">
+                                <h3>Run New Test</h3>
+                                <p>Execute RAI tests on your model and data</p>
+                            </div>
+                        </div>
+                        
+                        <div class="action-card" onclick="window.location.href='reports.html'">
+                            <div class="action-icon">
+                                <i data-feather="bar-chart-2"></i>
+                            </div>
+                            <div class="action-content">
+                                <h3>View Reports</h3>
+                                <p>Review past audit results and analysis</p>
+                            </div>
+                        </div>
+                        
+                        <div class="action-card" onclick="uploadToSupervision()">
+                            <div class="action-icon">
+                                <i data-feather="upload-cloud"></i>
+                            </div>
+                            <div class="action-content">
+                                <h3>Upload to Supervision</h3>
+                                <p>Share reports with AI supervision system</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Metrics Overview -->
+                <div class="metrics-overview">
+                    <h2>Testing Overview</h2>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i data-feather="folder"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value">8</div>
+                                <div class="metric-label">Active Use Cases</div>
+                            </div>
+                            <div class="metric-trend positive">
+                                <i data-feather="trending-up"></i>
+                                <span>+2 this month</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i data-feather="activity"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value">24</div>
+                                <div class="metric-label">Tests Completed</div>
+                            </div>
+                            <div class="metric-trend positive">
+                                <i data-feather="trending-up"></i>
+                                <span>+6 this week</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i data-feather="alert-triangle"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value">3</div>
+                                <div class="metric-label">Issues Found</div>
+                            </div>
+                            <div class="metric-trend warning">
+                                <i data-feather="alert-circle"></i>
+                                <span>Needs attention</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i data-feather="check-circle"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value">87%</div>
+                                <div class="metric-label">Compliance Rate</div>
+                            </div>
+                            <div class="metric-trend positive">
+                                <i data-feather="trending-up"></i>
+                                <span>+5% improvement</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Use Cases -->
+                <div class="recent-use-cases">
+                    <div class="section-header">
+                        <h2>Recent Use Cases</h2>
+                        <button class="btn-secondary" onclick="window.location.href='use-cases.html'">
+                            View All
+                        </button>
+                    </div>
+                    
+                    <div class="use-cases-grid">
+                        <div class="use-case-card">
+                            <div class="use-case-header">
+                                <div class="use-case-info">
+                                    <h3>Credit Scoring Model</h3>
+                                    <div class="use-case-meta">
+                                        <span class="risk-badge high">High Risk</span>
+                                        <span class="model-type">Classification</span>
+                                    </div>
+                                </div>
+                                <div class="use-case-status">
+                                    <div class="status-indicator active"></div>
+                                    <span>Active</span>
+                                </div>
+                            </div>
+                            <p class="use-case-description">Credit risk assessment model for loan applications with bias detection and fairness testing</p>
+                            <div class="use-case-stats">
+                                <div class="stat-item">
+                                    <span class="stat-value">5</span>
+                                    <span class="stat-label">Tests</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value">2 days ago</span>
+                                    <span class="stat-label">Last Run</span>
+                                </div>
+                            </div>
+                            <div class="use-case-actions">
+                                <button class="btn-primary" onclick="runTest('credit-scoring')">Run Test</button>
+                                <button class="btn-secondary" onclick="viewReports('credit-scoring')">View Reports</button>
+                            </div>
+                        </div>
+
+                        <div class="use-case-card">
+                            <div class="use-case-header">
+                                <div class="use-case-info">
+                                    <h3>Fraud Detection System</h3>
+                                    <div class="use-case-meta">
+                                        <span class="risk-badge medium">Medium Risk</span>
+                                        <span class="model-type">Classification</span>
+                                    </div>
+                                </div>
+                                <div class="use-case-status">
+                                    <div class="status-indicator active"></div>
+                                    <span>Active</span>
+                                </div>
+                            </div>
+                            <p class="use-case-description">Real-time fraud detection with focus on false positive rates and model interpretability</p>
+                            <div class="use-case-stats">
+                                <div class="stat-item">
+                                    <span class="stat-value">8</span>
+                                    <span class="stat-label">Tests</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value">1 week ago</span>
+                                    <span class="stat-label">Last Run</span>
+                                </div>
+                            </div>
+                            <div class="use-case-actions">
+                                <button class="btn-primary" onclick="runTest('fraud-detection')">Run Test</button>
+                                <button class="btn-secondary" onclick="viewReports('fraud-detection')">View Reports</button>
+                            </div>
+                        </div>
+
+                        <div class="use-case-card">
+                            <div class="use-case-header">
+                                <div class="use-case-info">
+                                    <h3>Document Summarization</h3>
+                                    <div class="use-case-meta">
+                                        <span class="risk-badge low">Low Risk</span>
+                                        <span class="model-type">Summarization</span>
+                                    </div>
+                                </div>
+                                <div class="use-case-status">
+                                    <div class="status-indicator testing"></div>
+                                    <span>Testing</span>
+                                </div>
+                            </div>
+                            <p class="use-case-description">Automated document summarization with quality and accuracy validation</p>
+                            <div class="use-case-stats">
+                                <div class="stat-item">
+                                    <span class="stat-value">3</span>
+                                    <span class="stat-label">Tests</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value">Running</span>
+                                    <span class="stat-label">Status</span>
+                                </div>
+                            </div>
+                            <div class="use-case-actions">
+                                <button class="btn-primary" disabled>Testing...</button>
+                                <button class="btn-secondary" onclick="viewReports('document-summarization')">View Reports</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Test Results -->
+                <div class="recent-tests">
+                    <div class="section-header">
+                        <h2>Recent Test Results</h2>
+                        <button class="btn-secondary" onclick="window.location.href='reports.html'">
+                            View All Reports
+                        </button>
+                    </div>
+                    
+                    <div class="tests-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Use Case</th>
+                                    <th>Test Date</th>
+                                    <th>Test Type</th>
+                                    <th>Status</th>
+                                    <th>Score</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="use-case-cell">
+                                            <span class="use-case-name">Credit Scoring Model</span>
+                                            <span class="model-type-small">Classification</span>
+                                        </div>
+                                    </td>
+                                    <td>2025-09-21 14:30</td>
+                                    <td>
+                                        <span class="test-type-badge">Fairness</span>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge completed">Completed</span>
+                                    </td>
+                                    <td>
+                                        <span class="score-badge good">85%</span>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" onclick="viewReport('test-1')" title="View Report">
+                                                <i data-feather="eye"></i>
+                                            </button>
+                                            <button class="btn-icon" onclick="uploadReport('test-1')" title="Upload to Supervision">
+                                                <i data-feather="upload"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="use-case-cell">
+                                            <span class="use-case-name">Fraud Detection System</span>
+                                            <span class="model-type-small">Classification</span>
+                                        </div>
+                                    </td>
+                                    <td>2025-09-20 09:15</td>
+                                    <td>
+                                        <span class="test-type-badge">Robustness</span>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge completed">Completed</span>
+                                    </td>
+                                    <td>
+                                        <span class="score-badge warning">72%</span>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" onclick="viewReport('test-2')" title="View Report">
+                                                <i data-feather="eye"></i>
+                                            </button>
+                                            <button class="btn-icon" onclick="uploadReport('test-2')" title="Upload to Supervision">
+                                                <i data-feather="upload"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="use-case-cell">
+                                            <span class="use-case-name">Document Summarization</span>
+                                            <span class="model-type-small">Summarization</span>
+                                        </div>
+                                    </td>
+                                    <td>2025-09-19 16:45</td>
+                                    <td>
+                                        <span class="test-type-badge">Explainability</span>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge running">Running</span>
+                                    </td>
+                                    <td>
+                                        <span class="score-badge pending">--</span>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" disabled title="Test in progress">
+                                                <i data-feather="clock"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="dashboard.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

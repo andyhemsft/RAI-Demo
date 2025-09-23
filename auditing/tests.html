@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Tests - AI Auditing System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i data-feather="cpu"></i>
+                <span>AI Auditing</span>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i data-feather="home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="use-cases.html" class="nav-link">
+                    <i data-feather="folder"></i>
+                    <span>Use Cases</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="tests.html" class="nav-link">
+                    <i data-feather="play-circle"></i>
+                    <span>Run Tests</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="reports.html" class="nav-link">
+                    <i data-feather="file-text"></i>
+                    <span>Audit Reports</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="settings.html" class="nav-link">
+                    <i data-feather="settings"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Run AI Tests</h1>
+                <p class="subtitle">Execute responsible AI testing on your models</p>
+            </div>
+            <div class="header-right">
+                <button class="btn-secondary" onclick="showTestHistory()">
+                    <i data-feather="clock"></i>
+                    Test History
+                </button>
+            </div>
+        </header>
+
+        <!-- Test Content -->
+        <div class="content-container">
+            <div class="test-execution-content">
+                
+                <!-- Test Setup Form -->
+                <div class="test-setup-card">
+                    <div class="card-header">
+                        <h3>Test Configuration</h3>
+                        <p class="card-subtitle">Configure your RAI testing parameters</p>
+                    </div>
+                    
+                    <form id="test-execution-form" class="test-form">
+                        <!-- Use Case Selection -->
+                        <div class="form-section">
+                            <h4>1. Select Use Case</h4>
+                            <div class="form-group">
+                                <label for="use-case-select">Use Case *</label>
+                                <select id="use-case-select" required>
+                                    <option value="">Select a use case to test</option>
+                                </select>
+                                <small class="form-help">Choose the use case you want to run tests for</small>
+                            </div>
+                            
+                            <div id="use-case-details" class="use-case-preview" style="display: none;">
+                                <div class="preview-content">
+                                    <div class="preview-info">
+                                        <h5 id="preview-name"></h5>
+                                        <div class="preview-meta">
+                                            <span class="risk-badge" id="preview-risk"></span>
+                                            <span class="model-type" id="preview-type"></span>
+                                        </div>
+                                        <p id="preview-description"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- File Uploads -->
+                        <div class="form-section">
+                            <h4>2. Upload Files</h4>
+                            
+                            <div class="file-upload-grid">
+                                <div class="file-upload-card">
+                                    <div class="upload-header">
+                                        <i data-feather="database"></i>
+                                        <h5>Training Data</h5>
+                                        <span class="required">Required</span>
+                                    </div>
+                                    <div class="upload-area" id="training-data-upload">
+                                        <input type="file" id="training-data-file" accept=".csv,.json,.parquet" hidden>
+                                        <div class="upload-placeholder">
+                                            <i data-feather="upload-cloud"></i>
+                                            <p>Drop training data file here or <span class="upload-link">browse</span></p>
+                                            <small>Supports CSV, JSON, Parquet</small>
+                                        </div>
+                                        <div class="upload-success" style="display: none;">
+                                            <i data-feather="check-circle"></i>
+                                            <p class="file-name"></p>
+                                            <button type="button" class="remove-file" onclick="removeFile('training-data')">
+                                                <i data-feather="x"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="file-upload-card">
+                                    <div class="upload-header">
+                                        <i data-feather="check-square"></i>
+                                        <h5>Testing Data</h5>
+                                        <span class="required">Required</span>
+                                    </div>
+                                    <div class="upload-area" id="testing-data-upload">
+                                        <input type="file" id="testing-data-file" accept=".csv,.json,.parquet" hidden>
+                                        <div class="upload-placeholder">
+                                            <i data-feather="upload-cloud"></i>
+                                            <p>Drop testing data file here or <span class="upload-link">browse</span></p>
+                                            <small>Supports CSV, JSON, Parquet</small>
+                                        </div>
+                                        <div class="upload-success" style="display: none;">
+                                            <i data-feather="check-circle"></i>
+                                            <p class="file-name"></p>
+                                            <button type="button" class="remove-file" onclick="removeFile('testing-data')">
+                                                <i data-feather="x"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="file-upload-card">
+                                    <div class="upload-header">
+                                        <i data-feather="cpu"></i>
+                                        <h5>Model File</h5>
+                                        <span class="required">Required</span>
+                                    </div>
+                                    <div class="upload-area" id="model-file-upload">
+                                        <input type="file" id="model-file" accept=".pkl,.h5,.pt,.pth,.onnx,.joblib" hidden>
+                                        <div class="upload-placeholder">
+                                            <i data-feather="upload-cloud"></i>
+                                            <p>Drop model file here or <span class="upload-link">browse</span></p>
+                                            <small>Supports PKL, H5, PT, ONNX, etc.</small>
+                                        </div>
+                                        <div class="upload-success" style="display: none;">
+                                            <i data-feather="check-circle"></i>
+                                            <p class="file-name"></p>
+                                            <button type="button" class="remove-file" onclick="removeFile('model-file')">
+                                                <i data-feather="x"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="file-upload-card">
+                                    <div class="upload-header">
+                                        <i data-feather="target"></i>
+                                        <h5>Ground Truth Labels</h5>
+                                        <span class="optional">Optional</span>
+                                    </div>
+                                    <div class="upload-area" id="ground-truth-upload">
+                                        <input type="file" id="ground-truth-file" accept=".csv,.json,.txt" hidden>
+                                        <div class="upload-placeholder">
+                                            <i data-feather="upload-cloud"></i>
+                                            <p>Drop ground truth file here or <span class="upload-link">browse</span></p>
+                                            <small>Supports CSV, JSON, TXT</small>
+                                        </div>
+                                        <div class="upload-success" style="display: none;">
+                                            <i data-feather="check-circle"></i>
+                                            <p class="file-name"></p>
+                                            <button type="button" class="remove-file" onclick="removeFile('ground-truth')">
+                                                <i data-feather="x"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Test Parameters -->
+                        <div class="form-section">
+                            <h4>3. Test Parameters</h4>
+                            
+                            <div class="parameters-grid">
+                                <div class="parameter-group">
+                                    <label for="test-types">Test Types *</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="fairness-test" value="fairness" checked>
+                                            <span class="checkbox-custom"></span>
+                                            <span>Fairness & Bias Testing</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="explainability-test" value="explainability" checked>
+                                            <span class="checkbox-custom"></span>
+                                            <span>Explainability & Interpretability</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="robustness-test" value="robustness">
+                                            <span class="checkbox-custom"></span>
+                                            <span>Robustness & Stability</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="performance-test" value="performance" checked>
+                                            <span class="checkbox-custom"></span>
+                                            <span>Performance & Accuracy</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="parameter-group">
+                                    <label for="protected-attributes">Protected Attributes</label>
+                                    <input type="text" id="protected-attributes" placeholder="e.g., gender, age, race">
+                                    <small class="form-help">Comma-separated list of sensitive attributes</small>
+                                </div>
+
+                                <div class="parameter-group">
+                                    <label for="confidence-level">Confidence Level</label>
+                                    <select id="confidence-level">
+                                        <option value="0.95" selected>95%</option>
+                                        <option value="0.90">90%</option>
+                                        <option value="0.99">99%</option>
+                                    </select>
+                                </div>
+
+                                <div class="parameter-group">
+                                    <label for="sample-size">Sample Size</label>
+                                    <input type="number" id="sample-size" value="1000" min="100" max="10000">
+                                    <small class="form-help">Number of samples to test (100-10000)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Options -->
+                        <div class="form-section">
+                            <div class="advanced-toggle">
+                                <button type="button" class="toggle-button" onclick="toggleAdvancedOptions()">
+                                    <span>Advanced Options</span>
+                                    <i data-feather="chevron-down" id="advanced-toggle-icon"></i>
+                                </button>
+                            </div>
+                            
+                            <div id="advanced-options" class="advanced-options" style="display: none;">
+                                <div class="parameters-grid">
+                                    <div class="parameter-group">
+                                        <label for="test-timeout">Test Timeout (minutes)</label>
+                                        <input type="number" id="test-timeout" value="30" min="5" max="120">
+                                    </div>
+
+                                    <div class="parameter-group">
+                                        <label for="random-seed">Random Seed</label>
+                                        <input type="number" id="random-seed" value="42">
+                                        <small class="form-help">For reproducible results</small>
+                                    </div>
+
+                                    <div class="parameter-group">
+                                        <label for="output-format">Output Format</label>
+                                        <select id="output-format">
+                                            <option value="json" selected>JSON Report</option>
+                                            <option value="html">HTML Report</option>
+                                            <option value="pdf">PDF Report</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="parameter-group">
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="detailed-logs" checked>
+                                            <span class="checkbox-custom"></span>
+                                            <span>Generate Detailed Logs</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="resetForm()">
+                                <i data-feather="refresh-cw"></i>
+                                Reset Form
+                            </button>
+                            <button type="button" class="btn-secondary" onclick="saveConfiguration()">
+                                <i data-feather="save"></i>
+                                Save Configuration
+                            </button>
+                            <button type="submit" class="btn-primary" id="run-test-btn" disabled>
+                                <i data-feather="play"></i>
+                                Run AI Tests
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Test Progress (Hidden by default) -->
+                <div id="test-progress-card" class="test-progress-card" style="display: none;">
+                    <div class="card-header">
+                        <h3>Test Execution in Progress</h3>
+                        <p class="card-subtitle">Running responsible AI tests on your model</p>
+                    </div>
+                    
+                    <div class="progress-content">
+                        <div class="progress-overview">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="overall-progress"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span id="progress-percentage">0%</span>
+                                <span id="progress-status">Initializing...</span>
+                            </div>
+                        </div>
+
+                        <div class="test-steps">
+                            <div class="step-item" data-step="setup">
+                                <div class="step-icon">
+                                    <i data-feather="settings"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h5>Setup & Validation</h5>
+                                    <p>Preparing test environment and validating inputs</p>
+                                </div>
+                                <div class="step-status">
+                                    <i data-feather="clock" class="status-pending"></i>
+                                </div>
+                            </div>
+
+                            <div class="step-item" data-step="fairness">
+                                <div class="step-icon">
+                                    <i data-feather="balance-scale"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h5>Fairness Testing</h5>
+                                    <p>Analyzing bias and fairness across groups</p>
+                                </div>
+                                <div class="step-status">
+                                    <i data-feather="clock" class="status-pending"></i>
+                                </div>
+                            </div>
+
+                            <div class="step-item" data-step="explainability">
+                                <div class="step-icon">
+                                    <i data-feather="eye"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h5>Explainability Testing</h5>
+                                    <p>Evaluating model interpretability and transparency</p>
+                                </div>
+                                <div class="step-status">
+                                    <i data-feather="clock" class="status-pending"></i>
+                                </div>
+                            </div>
+
+                            <div class="step-item" data-step="performance">
+                                <div class="step-icon">
+                                    <i data-feather="trending-up"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h5>Performance Testing</h5>
+                                    <p>Measuring accuracy and performance metrics</p>
+                                </div>
+                                <div class="step-status">
+                                    <i data-feather="clock" class="status-pending"></i>
+                                </div>
+                            </div>
+
+                            <div class="step-item" data-step="report">
+                                <div class="step-icon">
+                                    <i data-feather="file-text"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h5>Report Generation</h5>
+                                    <p>Compiling results and generating report</p>
+                                </div>
+                                <div class="step-status">
+                                    <i data-feather="clock" class="status-pending"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-actions">
+                            <button type="button" class="btn-secondary" onclick="cancelTest()" id="cancel-test-btn">
+                                <i data-feather="square"></i>
+                                Cancel Test
+                            </button>
+                            <button type="button" class="btn-primary" onclick="viewLogs()" style="display: none;" id="view-logs-btn">
+                                <i data-feather="file-text"></i>
+                                View Logs
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Test History Modal -->
+    <div id="test-history-modal" class="modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeTestHistoryModal()"></div>
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Test Execution History</h3>
+                <button class="close-btn" onclick="closeTestHistoryModal()">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="history-filters">
+                    <div class="filter-group">
+                        <label for="history-use-case">Filter by Use Case</label>
+                        <select id="history-use-case">
+                            <option value="">All Use Cases</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="history-status">Filter by Status</label>
+                        <select id="history-status">
+                            <option value="">All Statuses</option>
+                            <option value="completed">Completed</option>
+                            <option value="failed">Failed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="history-table-container">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Use Case</th>
+                                <th>Test Types</th>
+                                <th>Status</th>
+                                <th>Score</th>
+                                <th>Duration</th>
+                                <th>Started</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body">
+                            <!-- History items will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="tests.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
