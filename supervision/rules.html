@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule Configuration - AI Supervision System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i data-feather="shield"></i>
+                <span>AI Supervision</span>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i data-feather="home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="rules.html" class="nav-link">
+                    <i data-feather="settings"></i>
+                    <span>Rule Configuration</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="alerts.html" class="nav-link">
+                    <i data-feather="alert-triangle"></i>
+                    <span>Alerts</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="reports.html" class="nav-link">
+                    <i data-feather="file-text"></i>
+                    <span>Audit Reports</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Rule Configuration</h1>
+                <p class="subtitle">Define supervisory thresholds and automated alert conditions</p>
+            </div>
+            <div class="header-right">
+                <button class="btn-primary" onclick="saveAllRules()">
+                    <i data-feather="save"></i>
+                    Save All Rules
+                </button>
+            </div>
+        </header>
+
+        <!-- Rules Content -->
+        <div class="content-container">
+            <div class="rules-content">
+            <!-- Rule Categories Tabs -->
+            <div class="rule-tabs">
+                <button class="rule-tab active" data-category="bias">
+                    <i data-feather="users"></i>
+                    Bias & Fairness
+                </button>
+                <button class="rule-tab" data-category="performance">
+                    <i data-feather="trending-up"></i>
+                    Performance
+                </button>
+                <button class="rule-tab" data-category="robustness">
+                    <i data-feather="shield"></i>
+                    Robustness
+                </button>
+                <button class="rule-tab" data-category="explainability">
+                    <i data-feather="eye"></i>
+                    Explainability
+                </button>
+                <button class="rule-tab" data-category="custom">
+                    <i data-feather="plus-circle"></i>
+                    Custom Rules
+                </button>
+            </div>
+
+            <!-- Bias & Fairness Rules -->
+            <div class="rule-category active" id="bias-rules">
+                <div class="category-header">
+                    <h2>Bias & Fairness Thresholds</h2>
+                    <p>Configure alerts for bias detection and fairness metrics</p>
+                </div>
+
+                <div class="rules-grid">
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <h3>Disparate Impact Ratio</h3>
+                            <div class="rule-toggle">
+                                <input type="checkbox" id="disparate-impact" checked>
+                                <label for="disparate-impact"></label>
+                            </div>
+                        </div>
+                        <p class="rule-description">Alert when the ratio of favorable outcomes between protected and unprotected groups falls outside acceptable range</p>
+                        
+                        <div class="threshold-controls">
+                            <div class="threshold-item">
+                                <label>Warning Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="0.8" min="0" max="1" step="0.01">
+                                    <span class="threshold-unit">ratio</span>
+                                </div>
+                            </div>
+                            <div class="threshold-item">
+                                <label>Critical Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="0.7" min="0" max="1" step="0.01">
+                                    <span class="threshold-unit">ratio</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rule-actions">
+                            <button class="btn-test" onclick="testRule('disparate-impact')">Test Rule</button>
+                            <button class="btn-history" onclick="showRuleHistory('disparate-impact')">View History</button>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <h3>Equal Opportunity Difference</h3>
+                            <div class="rule-toggle">
+                                <input type="checkbox" id="equal-opportunity" checked>
+                                <label for="equal-opportunity"></label>
+                            </div>
+                        </div>
+                        <p class="rule-description">Monitor differences in true positive rates across demographic groups</p>
+                        
+                        <div class="threshold-controls">
+                            <div class="threshold-item">
+                                <label>Warning Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="0.1" min="0" max="1" step="0.01">
+                                    <span class="threshold-unit">difference</span>
+                                </div>
+                            </div>
+                            <div class="threshold-item">
+                                <label>Critical Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="0.2" min="0" max="1" step="0.01">
+                                    <span class="threshold-unit">difference</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rule-actions">
+                            <button class="btn-test" onclick="testRule('equal-opportunity')">Test Rule</button>
+                            <button class="btn-history" onclick="showRuleHistory('equal-opportunity')">View History</button>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <h3>Demographic Parity</h3>
+                            <div class="rule-toggle">
+                                <input type="checkbox" id="demographic-parity">
+                                <label for="demographic-parity"></label>
+                            </div>
+                        </div>
+                        <p class="rule-description">Ensure equal positive prediction rates across protected groups</p>
+                        
+                        <div class="threshold-controls">
+                            <div class="threshold-item">
+                                <label>Warning Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="0.05" min="0" max="1" step="0.01">
+                                    <span class="threshold-unit">difference</span>
+                                </div>
+                            </div>
+                            <div class="threshold-item">
+                                <label>Critical Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="0.1" min="0" max="1" step="0.01">
+                                    <span class="threshold-unit">difference</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rule-actions">
+                            <button class="btn-test" onclick="testRule('demographic-parity')">Test Rule</button>
+                            <button class="btn-history" onclick="showRuleHistory('demographic-parity')">View History</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Rules -->
+            <div class="rule-category" id="performance-rules">
+                <div class="category-header">
+                    <h2>Performance Thresholds</h2>
+                    <p>Set minimum acceptable performance standards</p>
+                </div>
+
+                <div class="rules-grid">
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <h3>Model Accuracy</h3>
+                            <div class="rule-toggle">
+                                <input type="checkbox" id="model-accuracy" checked>
+                                <label for="model-accuracy"></label>
+                            </div>
+                        </div>
+                        <p class="rule-description">Minimum accuracy threshold for model performance</p>
+                        
+                        <div class="threshold-controls">
+                            <div class="threshold-item">
+                                <label>Warning Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="85" min="0" max="100" step="0.1">
+                                    <span class="threshold-unit">%</span>
+                                </div>
+                            </div>
+                            <div class="threshold-item">
+                                <label>Critical Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="80" min="0" max="100" step="0.1">
+                                    <span class="threshold-unit">%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rule-actions">
+                            <button class="btn-test" onclick="testRule('model-accuracy')">Test Rule</button>
+                            <button class="btn-history" onclick="showRuleHistory('model-accuracy')">View History</button>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <h3>Precision Score</h3>
+                            <div class="rule-toggle">
+                                <input type="checkbox" id="precision-score" checked>
+                                <label for="precision-score"></label>
+                            </div>
+                        </div>
+                        <p class="rule-description">Minimum precision requirements for positive predictions</p>
+                        
+                        <div class="threshold-controls">
+                            <div class="threshold-item">
+                                <label>Warning Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="75" min="0" max="100" step="0.1">
+                                    <span class="threshold-unit">%</span>
+                                </div>
+                            </div>
+                            <div class="threshold-item">
+                                <label>Critical Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="70" min="0" max="100" step="0.1">
+                                    <span class="threshold-unit">%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rule-actions">
+                            <button class="btn-test" onclick="testRule('precision-score')">Test Rule</button>
+                            <button class="btn-history" onclick="showRuleHistory('precision-score')">View History</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Robustness Rules -->
+            <div class="rule-category" id="robustness-rules">
+                <div class="category-header">
+                    <h2>Robustness & Stability</h2>
+                    <p>Configure alerts for model robustness and stability issues</p>
+                </div>
+
+                <div class="rules-grid">
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <h3>Adversarial Attack Resistance</h3>
+                            <div class="rule-toggle">
+                                <input type="checkbox" id="adversarial-resistance" checked>
+                                <label for="adversarial-resistance"></label>
+                            </div>
+                        </div>
+                        <p class="rule-description">Maximum acceptable drop in accuracy under adversarial attacks</p>
+                        
+                        <div class="threshold-controls">
+                            <div class="threshold-item">
+                                <label>Warning Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="10" min="0" max="100" step="0.1">
+                                    <span class="threshold-unit">% drop</span>
+                                </div>
+                            </div>
+                            <div class="threshold-item">
+                                <label>Critical Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="20" min="0" max="100" step="0.1">
+                                    <span class="threshold-unit">% drop</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rule-actions">
+                            <button class="btn-test" onclick="testRule('adversarial-resistance')">Test Rule</button>
+                            <button class="btn-history" onclick="showRuleHistory('adversarial-resistance')">View History</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explainability Rules -->
+            <div class="rule-category" id="explainability-rules">
+                <div class="category-header">
+                    <h2>Explainability Standards</h2>
+                    <p>Set requirements for model interpretability and explanation quality</p>
+                </div>
+
+                <div class="rules-grid">
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <h3>Explanation Consistency</h3>
+                            <div class="rule-toggle">
+                                <input type="checkbox" id="explanation-consistency" checked>
+                                <label for="explanation-consistency"></label>
+                            </div>
+                        </div>
+                        <p class="rule-description">Minimum consistency score for model explanations across similar inputs</p>
+                        
+                        <div class="threshold-controls">
+                            <div class="threshold-item">
+                                <label>Warning Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="0.8" min="0" max="1" step="0.01">
+                                    <span class="threshold-unit">score</span>
+                                </div>
+                            </div>
+                            <div class="threshold-item">
+                                <label>Critical Threshold</label>
+                                <div class="threshold-input">
+                                    <input type="number" value="0.7" min="0" max="1" step="0.01">
+                                    <span class="threshold-unit">score</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rule-actions">
+                            <button class="btn-test" onclick="testRule('explanation-consistency')">Test Rule</button>
+                            <button class="btn-history" onclick="showRuleHistory('explanation-consistency')">View History</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Rules -->
+            <div class="rule-category" id="custom-rules">
+                <div class="category-header">
+                    <h2>Custom Rules</h2>
+                    <p>Create institution-specific or use-case-specific monitoring rules</p>
+                    <button class="btn-primary" onclick="createCustomRule()">
+                        <i data-feather="plus"></i>
+                        Create Custom Rule
+                    </button>
+                </div>
+
+                <div class="custom-rules-list">
+                    <div class="custom-rule-item">
+                        <div class="custom-rule-header">
+                            <h3>High-Risk Loan Approval Rate</h3>
+                            <div class="custom-rule-actions">
+                                <button class="btn-edit" onclick="editCustomRule('high-risk-loans')">
+                                    <i data-feather="edit-2"></i>
+                                </button>
+                                <button class="btn-delete" onclick="deleteCustomRule('high-risk-loans')">
+                                    <i data-feather="trash-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="custom-rule-description">Monitor approval rates for high-risk loan applications</p>
+                        <div class="custom-rule-status">
+                            <span class="status-badge active">Active</span>
+                            <span class="last-triggered">Last triggered: 2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <script src="rules.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
+</html>

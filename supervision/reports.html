@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Reports - AI Supervision System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i data-feather="shield"></i>
+                <span>AI Supervision</span>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i data-feather="home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="rules.html" class="nav-link">
+                    <i data-feather="settings"></i>
+                    <span>Rule Configuration</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="alerts.html" class="nav-link">
+                    <i data-feather="alert-triangle"></i>
+                    <span>Alerts</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="reports.html" class="nav-link">
+                    <i data-feather="file-text"></i>
+                    <span>Audit Reports</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Audit Reports</h1>
+                <p class="subtitle">Generate and view comprehensive audit reports for AI models across financial institutions</p>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <div class="notification-bell">
+                        <i data-feather="bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-avatar">
+                        <span>CB</span>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name">Central Bank User</span>
+                        <span class="user-role">Supervisor</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Container -->
+        <div class="content-container">
+            <!-- Top Bar -->
+            <div class="reports-top-bar">
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <label for="finance-institutions">Finance Institutions:</label>
+                        <div class="dropdown-container">
+                            <select id="finance-institutions" class="filter-dropdown">
+                                <option value="bank-a" selected>MetroBank</option>
+                                <option value="bank-b">CityFirst Bank</option>
+                                <option value="bank-c">National Bank</option>
+                            </select>
+                            <i data-feather="chevron-down" class="dropdown-icon"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="model-selection">Model:</label>
+                        <div class="dropdown-container">
+                            <select id="model-selection" class="filter-dropdown">
+                                <option value="credit-scoring-v1" selected>Credit Scoring – v1</option>
+                                <option value="credit-scoring-v2">Credit Scoring – v2</option>
+                                <option value="credit-scoring-v3">Credit Scoring – v3</option>
+                                <option value="fraud-detection-v1">Fraud Detection – v1</option>
+                                <option value="risk-assessment-v1">Risk Assessment – v1</option>
+                            </select>
+                            <i data-feather="chevron-down" class="dropdown-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-confirm" id="confirm-btn">
+                        <i data-feather="check"></i>
+                        Confirm
+                    </button>
+                    <button class="btn-reset" id="reset-btn">
+                        <i data-feather="refresh-cw"></i>
+                        Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Executive Summary Section -->
+            <div class="executive-summary-section">
+                <div class="summary-header">
+                    <h2>Executive Summary of Audit Findings</h2>
+                    <p class="ai-generated-notice">
+                        <i data-feather="cpu"></i>
+                        This summary is generated by Large Language Model (LLM) to support supervisory interpretation
+                    </p>
+                </div>
+                
+                <div class="summary-content">
+                    <div class="summary-overview">
+                        <div class="overall-assessment">
+                            <h3>Overall Model Assessment</h3>
+                            <div class="assessment-card moderate-risk">
+                                <div class="risk-indicator">
+                                    <span class="risk-level">MODERATE RISK</span>
+                                    <span class="confidence-score">Confidence: 87%</span>
+                                </div>
+                                <p class="assessment-text">
+                                    The Credit Scoring Model v1 demonstrates generally acceptable performance with notable areas requiring supervisory attention. While the model shows strong feature attribution clarity and reasonable fairness metrics, certain demographic groups exhibit concerning bias patterns that warrant immediate review and potential remediation.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="key-findings">
+                            <h3>Key Supervisory Findings</h3>
+                            <div class="findings-grid">
+                                <div class="finding-card priority-high">
+                                    <div class="finding-header">
+                                        <i data-feather="alert-triangle"></i>
+                                        <span class="priority-label">HIGH PRIORITY</span>
+                                    </div>
+                                    <h4>Fairness Concerns Identified</h4>
+                                    <p>Age and geographic disparities show warning-level bias ratios (0.78 and 0.77 respectively) below the 0.80 threshold. Rural applicants face systematic disadvantage in approval rates.</p>
+                                    <div class="recommendation">
+                                        <strong>Recommendation:</strong> Implement bias mitigation techniques and conduct focused review of rural market lending practices.
+                                    </div>
+                                </div>
+                                
+                                <div class="finding-card priority-medium">
+                                    <div class="finding-header">
+                                        <i data-feather="trending-up"></i>
+                                        <span class="priority-label">MEDIUM PRIORITY</span>
+                                    </div>
+                                    <h4>Model Interpretability Strength</h4>
+                                    <p>Feature attribution analysis shows clear, explainable decision patterns with Employment History (37.2%) and Annual Income (16.1%) as primary drivers. Model explanation coverage at 94.2% indicates robust interpretability.</p>
+                                    <div class="recommendation">
+                                        <strong>Status:</strong> Meets supervisory expectations for model transparency and explainability.
+                                    </div>
+                                </div>
+                                
+                                <div class="finding-card priority-low">
+                                    <div class="finding-header">
+                                        <i data-feather="shield"></i>
+                                        <span class="priority-label">LOW PRIORITY</span>
+                                    </div>
+                                    <h4>Stability and Robustness</h4>
+                                    <p>Model demonstrates good stability with low drift indicators and reasonable adversarial robustness. Counterfactual analysis shows accessible recourse paths for applicants.</p>
+                                    <div class="recommendation">
+                                        <strong>Status:</strong> Within acceptable operational parameters. Continue monitoring drift trends.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="regulatory-compliance">
+                            <h3>Regulatory Compliance Assessment</h3>
+                            <div class="compliance-matrix">
+                                <div class="compliance-item compliant">
+                                    <div class="compliance-status">
+                                        <i data-feather="check-circle"></i>
+                                        <span>COMPLIANT</span>
+                                    </div>
+                                    <div class="compliance-details">
+                                        <strong>Model Documentation</strong>
+                                        <p>Comprehensive feature attribution and performance metrics available</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="compliance-item needs-attention">
+                                    <div class="compliance-status">
+                                        <i data-feather="alert-circle"></i>
+                                        <span>NEEDS ATTENTION</span>
+                                    </div>
+                                    <div class="compliance-details">
+                                        <strong>Fair Lending Compliance</strong>
+                                        <p>Potential disparate impact on protected classes requires remediation plan</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="compliance-item compliant">
+                                    <div class="compliance-status">
+                                        <i data-feather="check-circle"></i>
+                                        <span>COMPLIANT</span>
+                                    </div>
+                                    <div class="compliance-details">
+                                        <strong>Model Risk Management</strong>
+                                        <p>Adequate monitoring and validation frameworks in place</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="action-items">
+                            <h3>Required Supervisory Actions</h3>
+                            <div class="action-timeline">
+                                <div class="action-item immediate">
+                                    <div class="timeline-marker immediate"></div>
+                                    <div class="action-content">
+                                        <div class="action-timeframe">IMMEDIATE (30 days)</div>
+                                        <h4>Bias Remediation Plan</h4>
+                                        <p>Institution must submit detailed plan to address age and geographic bias disparities, including proposed mitigation strategies and implementation timeline.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="action-item short-term">
+                                    <div class="timeline-marker short-term"></div>
+                                    <div class="action-content">
+                                        <div class="action-timeframe">SHORT-TERM (90 days)</div>
+                                        <h4>Enhanced Monitoring Implementation</h4>
+                                        <p>Deploy continuous bias monitoring systems and establish automated alerts for fairness metric deviations beyond acceptable thresholds.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="action-item ongoing">
+                                    <div class="timeline-marker ongoing"></div>
+                                    <div class="action-content">
+                                        <div class="action-timeframe">ONGOING</div>
+                                        <h4>Quarterly Review Cycle</h4>
+                                        <p>Establish regular supervisory review schedule with quarterly bias assessments and annual comprehensive model validation.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metrics Analysis Section -->
+            <div class="metrics-section">
+                <div class="metrics-header">
+                    <h2>Detailed Model Metrics & Analysis</h2>
+                    <p>Comprehensive AI model evaluation across key performance and compliance indicators</p>
+                </div>
+
+                <!-- Metrics Tabs -->
+                <div class="metrics-tabs">
+                    <button class="tab-btn active" data-tab="feature-attribution">
+                        <i data-feather="trending-up"></i>
+                        Feature Attribution
+                    </button>
+                    <button class="tab-btn" data-tab="bias-fairness">
+                    <i data-feather="users"></i>
+                    Bias & Fairness
+                </button>
+                <button class="tab-btn" data-tab="stability-drift">
+                    <i data-feather="activity"></i>
+                    Stability & Drift
+                </button>
+                <button class="tab-btn" data-tab="adversarial-robustness">
+                    <i data-feather="shield"></i>
+                    Adversarial Robustness
+                </button>
+                <button class="tab-btn" data-tab="counterfactual">
+                    <i data-feather="shuffle"></i>
+                    Counterfactual Analysis
+                </button>
+            </div>
+
+            <!-- Tab Content Panels -->
+            <div class="tab-content">
+                <!-- Feature Attribution Tab -->
+                <div class="tab-panel active" id="feature-attribution">
+                    <div class="metric-info">
+                        <h3>Feature Attribution Profile</h3>
+                        <p><strong>What it measures:</strong> Which input variables drive a model's decisions and by how much</p>
+                        <p><strong>Algorithm:</strong> SHAP, Integrated Gradients</p>
+                        <p><strong>Definition:</strong> Assigns each feature a Shapley value indicating its marginal contribution to the prediction relative to a baseline.</p>
+                    </div>
+                    
+                    <div class="shap-analysis">
+                        <div class="shap-values-table">
+                            <h4>Feature Contributions</h4>
+                            <div class="shap-table">
+                                <div class="shap-row shap-header">
+                                    <span>Feature</span>
+                                    <span>SHAP Value</span>
+                                    <span>Impact</span>
+                                    <span>Contribution</span>
+                                </div>
+                                <div class="shap-row positive">
+                                    <span class="feature-name">Employment History</span>
+                                    <span class="shap-value">+0.74</span>
+                                    <span class="impact-indicator positive">Positive</span>
+                                    <span class="contribution-bar">
+                                        <div class="bar-fill positive" style="width: 100%"></div>
+                                        <span class="percentage">37.2%</span>
+                                    </span>
+                                </div>
+                                <div class="shap-row positive">
+                                    <span class="feature-name">Annual Income</span>
+                                    <span class="shap-value">+0.32</span>
+                                    <span class="impact-indicator positive">Positive</span>
+                                    <span class="contribution-bar">
+                                        <div class="bar-fill positive" style="width: 43%"></div>
+                                        <span class="percentage">16.1%</span>
+                                    </span>
+                                </div>
+                                <div class="shap-row negative">
+                                    <span class="feature-name">Debt-to-Income Ratio</span>
+                                    <span class="shap-value">-0.28</span>
+                                    <span class="impact-indicator negative">Negative</span>
+                                    <span class="contribution-bar">
+                                        <div class="bar-fill negative" style="width: 38%"></div>
+                                        <span class="percentage">14.1%</span>
+                                    </span>
+                                </div>
+                                <div class="shap-row positive">
+                                    <span class="feature-name">Employment Years</span>
+                                    <span class="shap-value">+0.15</span>
+                                    <span class="impact-indicator positive">Positive</span>
+                                    <span class="contribution-bar">
+                                        <div class="bar-fill positive" style="width: 20%"></div>
+                                        <span class="percentage">7.5%</span>
+                                    </span>
+                                </div>
+                                <div class="shap-row negative">
+                                    <span class="feature-name">Requested Loan Amount</span>
+                                    <span class="shap-value">-0.12</span>
+                                    <span class="impact-indicator negative">Negative</span>
+                                    <span class="contribution-bar">
+                                        <div class="bar-fill negative" style="width: 16%"></div>
+                                        <span class="percentage">6.0%</span>
+                                    </span>
+                                </div>
+                                <div class="shap-row positive">
+                                    <span class="feature-name">Age</span>
+                                    <span class="shap-value">+0.08</span>
+                                    <span class="impact-indicator positive">Positive</span>
+                                    <span class="contribution-bar">
+                                        <div class="bar-fill positive" style="width: 11%"></div>
+                                        <span class="percentage">4.0%</span>
+                                    </span>
+                                </div>
+                                <div class="shap-row positive">
+                                    <span class="feature-name">Education Level</span>
+                                    <span class="shap-value">+0.06</span>
+                                    <span class="impact-indicator positive">Positive</span>
+                                    <span class="contribution-bar">
+                                        <div class="bar-fill positive" style="width: 8%"></div>
+                                        <span class="percentage">3.0%</span>
+                                    </span>
+                                </div>
+                                <div class="shap-row negative">
+                                    <span class="feature-name">Previous Defaults</span>
+                                    <span class="shap-value">-0.04</span>
+                                    <span class="impact-indicator negative">Negative</span>
+                                    <span class="contribution-bar">
+                                        <div class="bar-fill negative" style="width: 5%"></div>
+                                        <span class="percentage">2.0%</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-summary">
+                        <div class="summary-card">
+                            <span class="metric-label">Top Contributing Feature</span>
+                            <span class="metric-value">Employment History (+0.74)</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">Total Features Analyzed</span>
+                            <span class="metric-value">8 features</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">Model Explanation Coverage</span>
+                            <span class="metric-value status-good">94.2%</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">Baseline Value</span>
+                            <span class="metric-value">0.45</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bias & Fairness Tab -->
+                <div class="tab-panel" id="bias-fairness">
+                    <div class="metric-info">
+                        <h3>Bias / Fairness Ratio</h3>
+                        <p><strong>What it measures:</strong> Whether outcomes differ unfairly across protected groups (e.g., gender, ethnicity)</p>
+                        <p><strong>Algorithm:</strong> Disparate-impact ratio, Equal-opportunity difference</p>
+                        <p><strong>Definition:</strong> Compares positive outcome rates between protected and reference cohorts; values below 0.80 flag potential discrimination.</p>
+                    </div>
+                    
+                    <div class="bias-analysis">
+                        <h4>Fairness Matrix Analysis</h4>
+                        <div class="bias-matrix-container">
+                            <table class="bias-matrix">
+                                <thead>
+                                    <tr>
+                                        <th class="matrix-corner">Sensitive Groups</th>
+                                        <th>Disparate Impact</th>
+                                        <th>Equal Opportunity</th>
+                                        <th>Demographic Parity</th>
+                                        <th>Equalized Odds</th>
+                                        <th>Calibration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="group-label">Gender (Female vs Male)</td>
+                                        <td class="bias-cell good" data-value="0.84">0.84</td>
+                                        <td class="bias-cell good" data-value="0.87">0.87</td>
+                                        <td class="bias-cell good" data-value="0.82">0.82</td>
+                                        <td class="bias-cell warning" data-value="0.79">0.79</td>
+                                        <td class="bias-cell good" data-value="0.91">0.91</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="group-label">Age (Young vs Old)</td>
+                                        <td class="bias-cell warning" data-value="0.78">0.78</td>
+                                        <td class="bias-cell good" data-value="0.85">0.85</td>
+                                        <td class="bias-cell warning" data-value="0.76">0.76</td>
+                                        <td class="bias-cell good" data-value="0.83">0.83</td>
+                                        <td class="bias-cell good" data-value="0.88">0.88</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="group-label">Ethnicity (Minority vs Majority)</td>
+                                        <td class="bias-cell good" data-value="0.89">0.89</td>
+                                        <td class="bias-cell good" data-value="0.92">0.92</td>
+                                        <td class="bias-cell good" data-value="0.86">0.86</td>
+                                        <td class="bias-cell good" data-value="0.88">0.88</td>
+                                        <td class="bias-cell good" data-value="0.94">0.94</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="group-label">Income (Low vs High)</td>
+                                        <td class="bias-cell good" data-value="0.91">0.91</td>
+                                        <td class="bias-cell good" data-value="0.89">0.89</td>
+                                        <td class="bias-cell good" data-value="0.93">0.93</td>
+                                        <td class="bias-cell good" data-value="0.87">0.87</td>
+                                        <td class="bias-cell good" data-value="0.85">0.85</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="group-label">Education (Low vs High)</td>
+                                        <td class="bias-cell good" data-value="0.86">0.86</td>
+                                        <td class="bias-cell good" data-value="0.83">0.83</td>
+                                        <td class="bias-cell good" data-value="0.88">0.88</td>
+                                        <td class="bias-cell good" data-value="0.81">0.81</td>
+                                        <td class="bias-cell good" data-value="0.90">0.90</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="group-label">Geographic (Rural vs Urban)</td>
+                                        <td class="bias-cell warning" data-value="0.77">0.77</td>
+                                        <td class="bias-cell good" data-value="0.82">0.82</td>
+                                        <td class="bias-cell warning" data-value="0.74">0.74</td>
+                                        <td class="bias-cell good" data-value="0.86">0.86</td>
+                                        <td class="bias-cell good" data-value="0.89">0.89</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="bias-legend">
+                            <div class="legend-item">
+                                <span class="legend-color good"></span>
+                                <span>Good (≥ 0.80)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color warning"></span>
+                                <span>Warning (< 0.80)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color danger"></span>
+                                <span>Critical (< 0.70)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-summary">
+                        <div class="summary-card">
+                            <span class="metric-label">Overall Fairness Score</span>
+                            <span class="metric-value status-good">0.85</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">Groups at Risk</span>
+                            <span class="metric-value status-warning">2 groups</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">Critical Issues</span>
+                            <span class="metric-value status-good">0</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">Compliance Status</span>
+                            <span class="metric-value status-warning">Needs Review</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stability & Drift Tab -->
+                <div class="tab-panel" id="stability-drift">
+                    <div class="metric-info">
+                        <h3>Stability / Drift Indicator</h3>
+                        <p><strong>What it measures:</strong> How much the model's input data or output scores have shifted since approval</p>
+                        <p><strong>Algorithm:</strong> Population Stability Index (PSI), Kolmogorov–Smirnov statistic</p>
+                        <p><strong>Definition:</strong> Quantifies divergence between distributions; higher PSI signals the model may be operating on different data than it was trained for.</p>
+                    </div>
+                    
+                    <div class="drift-analysis">
+                        <div class="feature-drift-section">
+                            <h4>Drift Magnitude by Features</h4>
+                            <div class="feature-drift-container">
+                                <div class="feature-drift-table">
+                                    <div class="drift-row drift-header">
+                                        <span>Feature</span>
+                                        <span>PSI Value</span>
+                                        <span>Drift Status</span>
+                                        <span>Change from Baseline</span>
+                                        <span>Risk Level</span>
+                                    </div>
+                                    <div class="drift-row stable">
+                                        <span class="feature-name">Employment History</span>
+                                        <span class="psi-value">0.05</span>
+                                        <span class="drift-status stable">Stable</span>
+                                        <span class="change-indicator">
+                                            <div class="change-bar">
+                                                <div class="bar-fill stable" style="width: 25%"></div>
+                                                <span class="change-text">+2.3%</span>
+                                            </div>
+                                        </span>
+                                        <span class="risk-badge low">Low</span>
+                                    </div>
+                                    <div class="drift-row stable">
+                                        <span class="feature-name">Annual Income</span>
+                                        <span class="psi-value">0.07</span>
+                                        <span class="drift-status stable">Stable</span>
+                                        <span class="change-indicator">
+                                            <div class="change-bar">
+                                                <div class="bar-fill stable" style="width: 35%"></div>
+                                                <span class="change-text">+4.1%</span>
+                                            </div>
+                                        </span>
+                                        <span class="risk-badge low">Low</span>
+                                    </div>
+                                    <div class="drift-row warning">
+                                        <span class="feature-name">Debt-to-Income Ratio</span>
+                                        <span class="psi-value">0.12</span>
+                                        <span class="drift-status warning">Minor Drift</span>
+                                        <span class="change-indicator">
+                                            <div class="change-bar">
+                                                <div class="bar-fill warning" style="width: 60%"></div>
+                                                <span class="change-text">+8.7%</span>
+                                            </div>
+                                        </span>
+                                        <span class="risk-badge medium">Medium</span>
+                                    </div>
+                                    <div class="drift-row stable">
+                                        <span class="feature-name">Employment Years</span>
+                                        <span class="psi-value">0.04</span>
+                                        <span class="drift-status stable">Stable</span>
+                                        <span class="change-indicator">
+                                            <div class="change-bar">
+                                                <div class="bar-fill stable" style="width: 20%"></div>
+                                                <span class="change-text">+1.8%</span>
+                                            </div>
+                                        </span>
+                                        <span class="risk-badge low">Low</span>
+                                    </div>
+                                    <div class="drift-row stable">
+                                        <span class="feature-name">Age</span>
+                                        <span class="psi-value">0.03</span>
+                                        <span class="drift-status stable">Stable</span>
+                                        <span class="change-indicator">
+                                            <div class="change-bar">
+                                                <div class="bar-fill stable" style="width: 15%"></div>
+                                                <span class="change-text">+1.2%</span>
+                                            </div>
+                                        </span>
+                                        <span class="risk-badge low">Low</span>
+                                    </div>
+                                    <div class="drift-row warning">
+                                        <span class="feature-name">Loan Amount</span>
+                                        <span class="psi-value">0.15</span>
+                                        <span class="drift-status warning">Minor Drift</span>
+                                        <span class="change-indicator">
+                                            <div class="change-bar">
+                                                <div class="bar-fill warning" style="width: 75%"></div>
+                                                <span class="change-text">+12.4%</span>
+                                            </div>
+                                        </span>
+                                        <span class="risk-badge medium">Medium</span>
+                                    </div>
+                                    <div class="drift-row stable">
+                                        <span class="feature-name">Education Level</span>
+                                        <span class="psi-value">0.06</span>
+                                        <span class="drift-status stable">Stable</span>
+                                        <span class="change-indicator">
+                                            <div class="change-bar">
+                                                <div class="bar-fill stable" style="width: 30%"></div>
+                                                <span class="change-text">+3.5%</span>
+                                            </div>
+                                        </span>
+                                        <span class="risk-badge low">Low</span>
+                                    </div>
+                                    <div class="drift-row danger">
+                                        <span class="feature-name">Geographic Region</span>
+                                        <span class="psi-value">0.28</span>
+                                        <span class="drift-status danger">Significant Drift</span>
+                                        <span class="change-indicator">
+                                            <div class="change-bar">
+                                                <div class="bar-fill danger" style="width: 100%"></div>
+                                                <span class="change-text">+18.9%</span>
+                                            </div>
+                                        </span>
+                                        <span class="risk-badge high">High</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="drift-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color stable"></span>
+                                    <span>Stable (PSI < 0.1)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color warning"></span>
+                                    <span>Minor Drift (0.1 ≤ PSI < 0.2)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color danger"></span>
+                                    <span>Significant Drift (PSI ≥ 0.2)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-summary">
+                        <div class="summary-card">
+                            <span class="metric-label">Overall PSI Score</span>
+                            <span class="metric-value status-good">0.09</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">Features at Risk</span>
+                            <span class="metric-value status-warning">3 features</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">Last Model Retraining</span>
+                            <span class="metric-value">45 days ago</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">Next Review Due</span>
+                            <span class="metric-value status-warning">15 days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adversarial Robustness Tab -->
+                <div class="tab-panel" id="adversarial-robustness">
+                    <div class="metric-info">
+                        <h3>Adversarial Robustness Test</h3>
+                        <p><strong>What it measures:</strong> How vulnerable the model is to malicious input perturbations</p>
+                        <p><strong>Algorithm:</strong> FGSM, PGD, adversarial noise sweep</p>
+                        <p><strong>Definition:</strong> Adds minimal bounded noise to inputs; measures error rate increase. High sensitivity suggests exploitation risk.</p>
+                    </div>
+                    
+                    <div class="robustness-analysis">
+                        <!-- Robust Accuracy vs Epsilon -->
+                        <div class="robustness-section">
+                            <h4>Robust Accuracy vs Epsilon</h4>
+                            <p class="section-description">Shows how each model's performance degrades as perturbation strength increases. Flat, high lines = stronger defenses.</p>
+                            <div class="chart-container">
+                                <canvas id="robustAccuracyChart" width="800" height="300"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- Per-Segment Robust Accuracy -->
+                        <div class="robustness-section">
+                            <h4>Per-Segment Robust Accuracy</h4>
+                            <p class="section-description">Segments like Low Risk, Medium Risk, High Risk. Watch for segments that crater under attack.</p>
+                            <div class="chart-container">
+                                <canvas id="segmentRobustnessChart" width="800" height="300"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- Confusion Matrix Delta -->
+                        <div class="robustness-section">
+                            <h4>Confusion Matrix Delta (Adv − Clean)</h4>
+                            <p class="section-description">Highlights systematic flips (e.g., Low Risk → High Risk). Useful for feature-level hardening.</p>
+                            <div class="confusion-matrix-container">
+                                <div class="confusion-matrix risk-matrix">
+                                    <div class="matrix-label-top">
+                                        <span></span>
+                                        <span>Predicted Low Risk</span>
+                                        <span>Predicted Medium Risk</span>
+                                        <span>Predicted High Risk</span>
+                                    </div>
+                                    <div class="matrix-row">
+                                        <span class="matrix-label-left">Actual Low Risk</span>
+                                        <div class="matrix-cell delta-negative" data-value="-0.12">-12%</div>
+                                        <div class="matrix-cell delta-positive" data-value="+0.08">+8%</div>
+                                        <div class="matrix-cell delta-positive" data-value="+0.04">+4%</div>
+                                    </div>
+                                    <div class="matrix-row">
+                                        <span class="matrix-label-left">Actual Medium Risk</span>
+                                        <div class="matrix-cell delta-positive" data-value="+0.05">+5%</div>
+                                        <div class="matrix-cell delta-negative" data-value="-0.07">-7%</div>
+                                        <div class="matrix-cell delta-positive" data-value="+0.02">+2%</div>
+                                    </div>
+                                    <div class="matrix-row">
+                                        <span class="matrix-label-left">Actual High Risk</span>
+                                        <div class="matrix-cell delta-positive" data-value="+0.03">+3%</div>
+                                        <div class="matrix-cell delta-positive" data-value="+0.09">+9%</div>
+                                        <div class="matrix-cell delta-negative" data-value="-0.12">-12%</div>
+                                    </div>
+                                </div>
+                                <div class="matrix-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-color delta-positive"></div>
+                                        <span>Increase in adversarial predictions</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color delta-negative"></div>
+                                        <span>Decrease in adversarial predictions</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Reliability Curves -->
+                        <div class="robustness-section">
+                            <h4>Calibration under Attack (Reliability Curves)</h4>
+                            <p class="section-description"><strong>What it shows:</strong> Probability calibration for clean vs. adversarial samples.<br><strong>Why:</strong> Many models become over‑confident on adversarial inputs even when wrong—critical for risk decisions.</p>
+                            <div class="chart-container">
+                                <canvas id="reliabilityChart" width="800" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Counterfactual Analysis Tab -->
+                <div class="tab-panel" id="counterfactual">
+                    <div class="metric-info">
+                        <h3>Counterfactual Sensitivity</h3>
+                        <p><strong>What it measures:</strong> How easily an outcome can be flipped by minimally changing inputs</p>
+                        <p><strong>Algorithm:</strong> DiCE, Counterfactuals</p>
+                        <p><strong>Definition:</strong> Finds the smallest change set that switches a decision; helps understand decision boundaries and recourse possibilities.</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="counterfactualTornadoChart" width="800" height="500"></canvas>
+                    </div>
+                    <div class="metric-summary">
+                        <div class="summary-card">
+                            <span class="metric-label">Avg. Changes Required</span>
+                            <span class="metric-value">2.4 features</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">Feasibility Rate</span>
+                            <span class="metric-value status-good">87.3%</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">Recourse Difficulty</span>
+                            <span class="metric-value status-good">Low</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Content Container -->
+    </div>
+
+    
+    </main>
+
+    <script src="reports.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
